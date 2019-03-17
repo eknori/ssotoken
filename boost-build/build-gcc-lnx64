@@ -1,0 +1,16 @@
+#!/bin/bash
+export BOOST_ROOT=/opt/boost/boost_1_61_0
+
+bjam=${BOOST_ROOT}/bjam
+prjcfg=release
+application=ssotoken
+
+cd lnx64
+
+echo "Cleaning..."
+echo $bjam --clean toolset=gcc $prjcfg
+$bjam --clean toolset=gcc $prjcfg
+
+echo "Building new..."
+echo $bjam --toolset=gcc $prjcfg
+$bjam -d +1 --toolset=gcc $prjcfg

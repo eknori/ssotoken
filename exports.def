@@ -1,0 +1,4 @@
+	LIBRARY		ssotoken
+
+	EXPORTS
+		CreateLtpaToken		@1

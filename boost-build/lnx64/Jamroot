@@ -1,0 +1,76 @@
+import toolset : flags ;
+
+#import and set features to decrease amount of subdirectories for output files
+import feature ;
+feature.feature build-64 : on : composite ;
+feature.compose <build-64>on : <address-model>64 ;
+feature.set-default threading		: multi ;
+feature.set-default runtime-link	: shared ;
+feature.set-default link		: shared ;
+feature.set-default debug-symbols	: off ;
+feature.set-default inlining        	: on ;
+feature.set-default rtti 		: on ;
+feature.set-default exception-handling	: on ;
+feature.set-default asynch-exceptions	: on ;
+feature.set-default extern-c-nothrow	: off ;
+
+import path ;
+path-constant TOP : . ;
+local BUILD_DIR = $(TOP)/build ;
+local PROJECT_DIR = ../../ ;
+
+project ssotoken
+  : build-dir $(BUILD_DIR)
+  :  requirements
+	<optimization>speed
+;
+
+lib ssotoken :
+	[ glob $(PROJECT_DIR)/*.cpp ]
+:
+
+#--- DEFINES ------------
+	<define>UNIX
+	<define>LINUX
+	<define>LINUX64
+	<define>LINUX86_64
+	<define>LONGIS64BIT
+	<define>NDUNIX64
+	<define>NDLINUX64
+	<define>USE_THREADSAFE_INTERFACES
+	<define>PTHREAD_KERNEL
+	<define>DTRACE
+	<define>HANDLE_IS_32BITS
+	<define>HAS_BOOL
+	<define>HAS_DLOPEN
+	<define>HAS_IOCP
+	<define>LARGE64_FILES
+	<define>ND64
+	<define>USE_PTHREAD_INTERFACES
+	<define>W32
+	<define>_LARGEFILE64_SOURCE
+	<define>_LARGEFILE_SOURCE
+	<define>_POSIX_THREAD_SAFE_FUNCTIONS
+	<define>_REENTRANT
+	<cxxflags>-shared-libgcc
+	<cxxflags>-fPIC
+	<cflags>-fPIC
+	<warnings>off
+	<cxxflags>-O2
+	<cxxflags>-m64
+	
+#--- INCLUDES -----------------
+	<include>$NOTESAPI/901/include/
+	
+#--- LINKER OPTIONS  ---------------- 
+	<linkflags>-shared-libgcc
+	<linkflags>-lnotes	
+	<linkflags>-lpthread	
+	<linkflags>-lc
+	<linkflags>-lm
+	<linkflags>-lnsl
+	<linkflags>-lresolv
+	<linkflags>-ldl
+	<linkflags>-fPIC
+	<linkflags>-shared
+;
