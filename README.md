@@ -4,23 +4,23 @@ dynamic / shared library for Domino to generate an SSO token
 # LotusScript Declaration
 
 ## Windows
-
+```
 Declare Function WIN_CreateLtpaToken Lib "nssotoken.dll" Alias {CreateLtpaToken} (_
 ByVal serverName As String,_
 ByVal orgName As String,_
 ByVal configName As String,_
 ByVal userName As String,_
 ByVal token As String, ByVal errMsg As String) As Integer
-
+```
 ## Linux
-
+```
 Declare Function LIN_CreateLtpaToken Lib {libssotoken.so} Alias {CreateLtpaToken} (_
 ByVal serverName As String,_
 ByVal orgName As String,_
 ByVal configName As String,_
 ByVal userName As String,_
 ByVal token As String, ByVal errMsg As String) As Integer
-
+```
 
 # Sample usage
 
