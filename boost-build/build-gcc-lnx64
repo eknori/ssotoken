@@ -1,7 +1,10 @@
 #!/bin/bash
-export BOOST_ROOT=/opt/boost/boost_1_61_0
+# Domino 10 environment
+bjam=/data/libs_external/boost/boost_1_61_0/boost.build/bin/bjam
 
-bjam=${BOOST_ROOT}/bjam
+# Domino 9 environment
+#export BOOST_ROOT=/opt/boost/boost_1_61_0
+#bjam=${BOOST_ROOT}/bjam
 prjcfg=release
 application=ssotoken
 

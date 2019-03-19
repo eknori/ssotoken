@@ -18,33 +18,50 @@
 #if defined(LINUX)
 extern "C" {
 #endif
+
  STATUS LNPUBLIC CreateLtpaToken(char *servername,char *configname,char *orgname,char *username, char *ltpaToken, char *errorMessage)
 	{
+
 	STATUS errorStatus = NOERROR;
 	char notesError[255];
+	MEMHANDLE mhToken;
 
 	if (errorStatus = NotesInit()) {
+
 		OSLoadString(NULLHANDLE, ERR(errorStatus), notesError, 255);
-		printf("error = %s\n", notesError);
+		printf("%s\n", notesError);
 		strcpy(errorMessage, notesError);
+		
 		return errorStatus;
 		}
 
-	MEMHANDLE mhToken;
 	errorStatus = SECTokenGenerate(servername, orgname, configname, username, 0, 0, &mhToken, (DWORD)0, (void *)NULL);
+	
 	if(errorStatus != NOERROR) {
+
 		OSLoadString(NULLHANDLE, ERR(errorStatus), notesError, 255);
-		printf("error = %s\n", notesError);
+		printf("%s\n", notesError);
 		strcpy(errorMessage, notesError);
+
+		NotesTerm();
+
 		return errorStatus;
+
 		} else {
 			SSO_TOKEN *ssoToken = (SSO_TOKEN*)OSMemoryLock(mhToken);
 			char *pData = (char*)OSMemoryLock(ssoToken->mhData);
 			strcpy(ltpaToken, pData);
 			SECTokenFree(&mhToken);
 		}
+
+		OSLoadString(NULLHANDLE, ERR(errorStatus), notesError, 255);
+		printf("%s\n", notesError);
+		strcpy(errorMessage, notesError);
+
 	NotesTerm();
-	return 0;
+
+	return errorStatus;
+
 	}
 #if defined(LINUX)
 }

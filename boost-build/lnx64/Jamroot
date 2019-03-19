@@ -60,6 +60,7 @@ lib ssotoken :
 	<cxxflags>-m64
 	
 #--- INCLUDES -----------------
+	# Domino 10 environment
 	<include>$NOTESAPI/901/include/
 	
 #--- LINKER OPTIONS  ---------------- 
