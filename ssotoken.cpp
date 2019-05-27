@@ -35,7 +35,7 @@ extern "C" {
 		return errorStatus;
 		}
 
-	errorStatus = SECTokenGenerate(servername, orgname, configname, username, 0, 0, &mhToken, (DWORD)0, (void *)NULL);
+	errorStatus = SECTokenGenerate(servername, orgname, configname, username, NULL, NULL, &mhToken, (DWORD)0, (void *)NULL);
 	
 	if(errorStatus != NOERROR) {
 
